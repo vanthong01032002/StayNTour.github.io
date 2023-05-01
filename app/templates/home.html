@@ -1,0 +1,342 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="slide-one-item home-slider owl-carousel">
+  
+  <div class="site-blocks-cover overlay" style="background-image: url(static/images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-7 text-center" data-aos="fade">
+          
+          <h1 class="mb-2">Welcome To Suites</h1>
+          <h2 class="caption">Hotel &amp; Resort</h2>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <div class="site-blocks-cover overlay" style="background-image: url(static/images/hero_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-7 text-center" data-aos="fade">
+          <h1 class="mb-2">Unique Experience</h1>
+          <h2 class="caption">Enjoy With Us</h2>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="site-blocks-cover overlay" style="background-image: url(static/images/hero_3.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-7 text-center" data-aos="fade">
+          <h1 class="mb-2">Relaxing Room</h1>
+          <h2 class="caption">Your Room, Your Stay</h2>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+        <h2 class="mb-5">Danh sách loại phòng</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% for room in typeroom %}
+      <div class="col-md-6 col-lg-4 mb-5">
+        <div class="hotel-room text-center">
+          <a class="d-block mb-0 thumbnail"><img src="{{room[3]}}" alt="Image" class="img-fluid"></a>
+          <div class="hotel-room-body">
+            <h3 class="heading mb-0"><a href="#">{{ room[1] }}</a></h3>
+            <strong class="price">VND {{room[4]| int}},000</strong>
+          </div>
+          <a type="button" class="btn btn-primary"style = "border-radius:0;   border:1px #858585 solid; margin-bottom: 20px; background-color:#fff;color:#000000">Xem chi tiết</a>
+          <a href="{{ url_for('room_item', TypeId=room[0] | b64encode) }}"  class="btn btn-primary" style = "border-radius:0; margin-bottom: 20px;">Xem phòng</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+        <h2 class="mb-5">Phòng còn trống</h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      {% for room in rooms %}
+      <div class="col-md-6 col-lg-3" style="display: inline-block;padding-right: 10px;vertical-align: top;">
+        <a href="images/img_2.jpg" class="image-popup img-opacity"><img src="{{room[6]}}" alt="Image" class="img-fluid"></a>
+        <div style = 'margin-left:2px;'> 
+          <p style="color:black;margin-bottom:-5px;">Phòng số {{room[0]}}</p>
+          <span style="font-size:120%;color:#ff567d;">&starf;&starf;&starf;&starf;&star;</span>
+          <p style="font-size:13px;"></p>
+          <p style = 'color:rgb(225, 45, 45);margin-top:-18px;'>VND {{room[11]}}</p>
+        </div> 
+        <a href="{{ url_for('booking', RoomID = room[0] | b64encode) }}"  class="btn btn-primary" style = "border-radius:0; margin-bottom: 20px;">Đặt phòng</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div>{{username}}</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-5 mb-md-0">
+        
+          <div class="img-border">
+            <a href="https://vimeo.com/28959265" class="popup-vimeo image-play">
+              <span class="icon-wrap">
+                <span class="icon icon-play"></span>
+              </span>
+              <img src="{{ url_for('static', filename='images/img_2.jpg') }}" alt="" class="img-fluid">
+            </a>
+          </div>
+
+          <img src="{{ url_for('static', filename='images/img_1.jpg') }}" alt="Image" class="img-fluid image-absolute">
+        
+      </div>
+      <div class="col-md-5 ml-auto">
+        <div class="section-heading text-left">
+          <h2 class="mb-5">Thông tin</h2>
+        </div>
+        <p class="mb-4">StayNTouch luôn mang vẻ đẹp hiện đại xen lẫn nét cổ kính. Đặt khách sạn sớm nhất để hưởng trọn ưu đãi, hứa hẹn một kì nghỉ với những ...</p>
+        <p><a href="https://vimeo.com/28959265" class="popup-vimeo text-uppercase">Xem Video <span class="icon-arrow-right small"></span></a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+        <h2 class="mb-5">DỊCH VỤ HIỆN CÓ</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% for service in services %}
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <img src="../static/images/{{service[4]}}" alt="" class="img-fluid" style = 'width:80px; margin-bottom:20px;'>
+          <h2 class="h5">{{service[2]}}</h2>
+        </div>
+      </div>
+      {% endfor %}
+      
+      <!-- <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          
+          <h2 class="h5">Gọi thức ăn nhanh</h2>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-exit display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Thoát hiểm an toàn</h2>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-parking display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Bãi đổ xe</h2>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-hair-dryer display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Tạo mẫu tóc</h2>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-minibar display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Quầy bar</h2>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-drink display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Thức uống</h2>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="text-center p-4 item">
+          <span class="flaticon-cab display-3 mb-3 d-block text-primary"></span>
+          <h2 class="h5">Thuê ô tô</h2>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="site-section block-15">
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+        <h2 >Thông tin phòng</h2>
+      </div>
+    </div>
+
+
+    <div class="nonloop-block-15 owl-carousel">
+      
+
+        <div class="media-with-text p-md-5">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_1.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_2.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_3.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_1.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_2.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_3.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+        
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_1.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_2.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+      
+        <div class="media-with-text p-md-4">
+          <div class="img-border-sm mb-4">
+            <a href="#" class="popup-vimeo image-play">
+              <img src="images/img_3.jpg" alt="" class="img-fluid">
+            </a>
+          </div>
+          <h2 class="heading mb-0"><a href="#">Lorem Ipsum Dolor Sit Amet</a></h2>
+          <span class="mb-3 d-block post-date">Dec 20th, 2018 &bullet; By <a href="#">Admin</a></span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="py-5 quick-contact-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <div>
+          <span class="icon-room text-white h2 d-block"></span>
+          <h2>Location</h2>
+          <p class="mb-0"><a href = "https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+Khoa+h%E1%BB%8Dc+T%E1%BB%B1+nhi%C3%AAn+-+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+Qu%E1%BB%91c+gia+TP.HCM/@13.1212379,108.3564089,12z/data=!4m6!3m5!1s0x31752f1c06f4e1dd:0x43900f1d4539a3d!8m2!3d10.7628356!4d106.6824824!16s%2Fm%2F02r129r"></a> 01 Nguyễn Văn Cừ, Quận 5, TP.HCM <br></p>
+          <div id="map" onload="initMap()" style="width: 100%; height: 200px;"></div>
+       
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div>
+          <span class="icon-clock-o text-white h2 d-block"></span>
+          <h2>Service Times</h2>
+          <p class="mb-0">Wednesdays at 6:30PM - 7:30PM <br>
+          Fridays at Sunset - 7:30PM <br>
+          Saturdays at 8:00AM - Sunset</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div>
+          <span class="icon-comments text-white h2 d-block"></span>
+          <h2>Get In Touch</h2>
+          <p class="mb-0">Email: info@yoursite.com <br>
+          Phone: (123) 3240-345-9348 </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<YOUR_API_KEY>"></script>
+  <script>
+    function initMap() {
+      var mapDiv = document.getElementById('map');
+      var map = new google.maps.Map(mapDiv, {
+        center: {lat: 10.8231, lng: 106.6297},
+        zoom: 12
+      });
+    }
+  </script>
+{% endblock %}
